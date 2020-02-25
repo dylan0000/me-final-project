@@ -1,25 +1,51 @@
 namespace SpriteKind {
     export const cursor = SpriteKind.create()
 }
+controller.up.onEvent(ControllerButtonEvent.Released, function () {
+    if (stilltitlescreen == true) {
+        if (mouse.y == 70 && mouse.y > 50) {
+            mouse.y += -20
+        }
+    } else {
+        Person.setImage(img`
+. . . . . . . f f f . . . . . . 
+. . . . . . f 1 1 1 f . . . . . 
+. . . . . f 1 1 1 1 1 f . . . . 
+. . . . . f 1 f 1 f 1 f . . . . 
+. . . . . f 1 1 f 1 1 f . . . . 
+. . . . . . f 1 1 1 f . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . . . f . . . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . f . f . f . . . . . 
+. . . . . . f . f . f . . . . . 
+. . . . . . . f . f . . . . . . 
+. . . . . . . f . f . . . . . . 
+. . . . . . f . . . f . . . . . 
+. . . . . . f . . . f . . . . . 
+. . . . . . f . . . f . . . . . 
+`)
+    }
+})
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b 5 b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b 5 b b b . . . . . . . . . . . . . . . . . . . . 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 `, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -72,6 +98,78 @@ function LevelsList () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `]
+        scene.setTile(15, img`
+f f f f f f f f f f f f f f f f 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+f f f f f f f f f f f f f f f f 
+`, true)
+        scene.setTile(11, img`
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`, true)
+        scene.setTile(1, img`
+c c c c c c c c c c c c c c c c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c c c c c c c c c c c c c c c c 
+`, true)
+        scene.setTile(5, img`
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+`, true)
     } else if (difficulty == 1) {
         LevelList = [img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -240,6 +338,9 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 `)
     }
 })
+scene.onHitWall(SpriteKind.Player, function (sprite) {
+    sprite.vy = 0
+})
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 50 && mouse.y < 70) {
@@ -269,10 +370,33 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
 function CreateCoins () {
 	
 }
+function Player2 () {
+    Person = sprites.create(img`
+. . . . . . . f f f . . . . . . 
+. . . . . . f 1 1 1 f . . . . . 
+. . . . . f 1 1 1 1 1 f . . . . 
+. . . . . f 1 f 1 f 1 f . . . . 
+. . . . . f 1 1 f 1 1 f . . . . 
+. . . . . . f 1 1 1 f . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . . . f . . . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . f . f . f . . . . . 
+. . . . . . f . f . f . . . . . 
+. . . . . . . f . f . . . . . . 
+. . . . . . . f . f . . . . . . 
+. . . . . . f . . . f . . . . . 
+. . . . . . f . . . f . . . . . 
+. . . . . . f . . . f . . . . . 
+`, SpriteKind.Player)
+    Person.ay = 300
+    scene.cameraFollowSprite(Person)
+    controller.moveSprite(Person, 100, 0)
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
         stilltitlescreen = false
-        Player()
+        Player2()
         mouse.destroy()
         scene.setTileMap(LevelList[levelnumber])
         scene.setBackgroundImage(img`
@@ -397,6 +521,7 @@ b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 `)
+        tiles.placeOnTile(Person, tiles.getTileLocation(0, 14))
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -408,29 +533,6 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-function Player () {
-    Person = sprites.create(img`
-. . . . . . . f f f . . . . . . 
-. . . . . . f 1 1 1 f . . . . . 
-. . . . . f 1 1 1 1 1 f . . . . 
-. . . . . f 1 f 1 f 1 f . . . . 
-. . . . . f 1 1 f 1 1 f . . . . 
-. . . . . . f 1 1 1 f . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . . . f . . . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . f . f . f . . . . . 
-. . . . . . f . f . f . . . . . 
-. . . . . . . f . f . . . . . . 
-. . . . . . . f . f . . . . . . 
-. . . . . . f . . . f . . . . . 
-. . . . . . f . . . f . . . . . 
-. . . . . . f . . . f . . . . . 
-`, SpriteKind.Player)
-    Person.ay = 300
-    scene.cameraFollowSprite(Person)
-    controller.moveSprite(Person, 100, 0)
-}
 function Title_Screen () {
     stilltitlescreen = true
     difficulty = 0
@@ -587,29 +689,29 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             Person.setImage(img`
 . . . . . . . f f f . . . . . . 
 . . . . . . f 1 1 1 f . . . . . 
-. . . . . f 1 1 1 1 1 f . . . . 
 . . . . . f 1 f 1 f 1 f . . . . 
 . . . . . f 1 1 f 1 1 f . . . . 
+. . . . . f 1 1 1 1 1 f . . . . 
 . . . . . . f 1 1 1 f . . . . . 
-. . . . . . . f f f . . . . . . 
+. . . . . f . f f f . f . . . . 
+. . . . . f . . f . . f . . . . 
+. . . . . . f f f f f . . . . . 
 . . . . . . . . f . . . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . f . f . f . . . . . 
-. . . . . . f . f . f . . . . . 
+. . . . . . . . f . . . . . . . 
 . . . . . . . f . f . . . . . . 
 . . . . . . . f . f . . . . . . 
-. . . . . . f . . . f . . . . . 
-. . . . . . f . . . f . . . . . 
-. . . . . . f . . . f . . . . . 
+. . . . . . . f . f . . . . . . 
+. . . . . . f . f . . . . . . . 
+. . . . . . f . f . . . . . . . 
 `)
         }
     }
 })
+let LevelList: Image[] = []
+let difficulty = 0
 let Person: Sprite = null
 let mouse: Sprite = null
 let stilltitlescreen = false
-let LevelList: Image[] = []
-let difficulty = 0
 let levelnumber = 0
 levelnumber = 0
 LevelsList()
