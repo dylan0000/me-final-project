@@ -27,25 +27,32 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
 `)
     }
 })
+function Instructions () {
+	
+}
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b 5 b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b 5 b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . b b b b . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . b b b b b b . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
+. . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
+. . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . b b b b b b . . . . . . . . f 
+. . . . . b b b 5 b b b . . . . . b b 5 5 b b . . . . . . . . . 
+. . . . . b b b 5 b b b . . . . 9 b b 5 5 b b . . . . . . . . . 
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -169,6 +176,24 @@ e e e e e e e e e e e e e e e e
 e e e e e e e e e e e e e e e e 
 e e e e e e e e e e e e e e e e 
 e e e e e e e e e e e e e e e e 
+`, true)
+        scene.setTile(9, img`
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
+. 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
+. 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
+. 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 b b b b b b 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `, true)
     } else if (difficulty == 1) {
         LevelList = [img`
@@ -339,7 +364,17 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 scene.onHitWall(SpriteKind.Player, function (sprite) {
-    sprite.vy = 0
+    if (canjump == false) {
+        Person.vy = 0
+        doubleJump = true
+    }
+    if (Person.isHittingTile(CollisionDirection.Bottom)) {
+        if (Person.y > Myheight + 80) {
+            info.changeLifeBy(-1)
+            Person.vy = -40
+        }
+    }
+    Myheight = Person.y
 })
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     if (stilltitlescreen == true) {
@@ -371,6 +406,7 @@ function CreateCoins () {
 	
 }
 function Player2 () {
+    info.setLife(4)
     Person = sprites.create(img`
 . . . . . . . f f f . . . . . . 
 . . . . . . f 1 1 1 f . . . . . 
@@ -389,17 +425,19 @@ function Player2 () {
 . . . . . . f . . . f . . . . . 
 . . . . . . f . . . f . . . . . 
 `, SpriteKind.Player)
-    Person.ay = 300
+    Person.ay = 350
     scene.cameraFollowSprite(Person)
     controller.moveSprite(Person, 100, 0)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
-        stilltitlescreen = false
-        Player2()
-        mouse.destroy()
-        scene.setTileMap(LevelList[levelnumber])
-        scene.setBackgroundImage(img`
+        if (mouse.y == 50) {
+            stilltitlescreen = false
+            LevelsList()
+            Player2()
+            mouse.destroy()
+            scene.setTileMap(LevelList[levelnumber])
+            scene.setBackgroundImage(img`
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
@@ -521,15 +559,18 @@ b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 `)
-        tiles.placeOnTile(Person, tiles.getTileLocation(0, 14))
+            tiles.placeOnTile(Person, tiles.getTileLocation(0, 16))
+        }
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
-        if (difficulty < 2) {
-            difficulty += 1
-        } else {
-            difficulty = 0
+        if (mouse.y == 70) {
+            if (difficulty < 2) {
+                difficulty += 1
+            } else {
+                difficulty = 0
+            }
         }
     }
 })
@@ -684,9 +725,8 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             mouse.y += -20
         }
     } else {
-        if (Person.vy == 0) {
-            Person.vy = -150
-            Person.setImage(img`
+        DoubleJump()
+        Person.setImage(img`
 . . . . . . . f f f . . . . . . 
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . f 1 f 1 f 1 f . . . . 
@@ -704,9 +744,27 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 . . . . . . f . f . . . . . . . 
 . . . . . . f . f . . . . . . . 
 `)
-        }
     }
 })
+function DoubleJump () {
+    if (canjump == true) {
+        if (Person.vy == 0) {
+            Person.vy = -150
+            pause(50)
+            Person.vy = 0
+            doubleJump = true
+        }
+    } else {
+        if (doubleJump == true) {
+            doubleJump = false
+            pause(50)
+            Person.vy = -150
+        }
+    }
+}
+let Myheight = 0
+let doubleJump = false
+let canjump = false
 let LevelList: Image[] = []
 let difficulty = 0
 let Person: Sprite = null
@@ -714,7 +772,6 @@ let mouse: Sprite = null
 let stilltitlescreen = false
 let levelnumber = 0
 levelnumber = 0
-LevelsList()
 Title_Screen()
 game.onUpdate(function () {
     if (stilltitlescreen == true) {
