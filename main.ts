@@ -28,26 +28,153 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
 `)
     }
 })
+scene.onHitTile(SpriteKind.Player, 9, function (sprite) {
+    if (difficulty == 0) {
+        sprite.x += -5
+        game.splash("Current balance: " + cashAmount)
+        moneyinteraction = game.askForString("¨Deposit¨ or ¨withdraw¨ money? Or ¨no¨.")
+        if (moneyinteraction == "deposit") {
+            BANKaccount += cashAmount
+            game.splash("Amount in bank: " + BANKaccount)
+            cashAmount = 0
+        } else if (moneyinteraction == "withdraw") {
+            cashAmount += BANKaccount
+            game.splash("Amount taken: " + cashAmount)
+            BANKaccount = 0
+        } else if (moneyinteraction == "no") {
+            game.splash("ok")
+        }
+    }
+})
+function Arrays () {
+    // rubber duck cost for 1 = $10
+    //
+    // damage = 2
+    //
+    // pellet cost for 1 = $16
+    //
+    // damage = 3.5
+    //
+    // bomb cost for 1 = $26
+    //
+    // damage = 8
+    //
+    // star cost for 1 = $22
+    //
+    //
+    // damage = 4
+    //
+    // coin cost for 1 = $33
+    //
+    //
+    // damage = 12
+    Available_weapon_sprites = [img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . 5 5 . . . . 
+. . . . . . . . . 5 5 5 5 . . . 
+. . . . . . . . . 5 f 5 4 4 . . 
+. . . . . . 5 5 5 5 5 5 . . . . 
+. . . . 5 5 5 5 5 5 5 . . . . . 
+. . . . . 5 5 5 5 5 5 . . . . . 
+. . . . . . 5 5 5 5 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 1 1 . . . . . . . 
+. . . . . . . 1 1 . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 5 . . . . . . . . 
+. . . . . . . . b . . . . . . . 
+. . . . . . . . b . . . . . . . 
+. . . . . . f f f f . . . . . . 
+. . . . . f f f f f f . . . . . 
+. . . . f f f f f f f f . . . . 
+. . . . f f f f f f f f . . . . 
+. . . . f f f f f f f f . . . . 
+. . . . f f f f f f f f . . . . 
+. . . . . f f f f f f . . . . . 
+. . . . . . f f f f . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 6 6 . . . . . . . . 
+. . . . . . 6 1 6 6 6 . . . . . 
+. . . . . . 6 1 1 1 6 . . . . . 
+. . . . . 6 1 1 1 6 . . . . . . 
+. . . . . 6 6 6 1 6 . . . . . . 
+. . . . . . . . 6 6 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . f f f . . . . . . . 
+. . . . . f 5 5 5 f . . . . . . 
+. . . . f 5 5 5 5 5 f . . . . . 
+. . . . f 5 5 5 5 5 f . . . . . 
+. . . . f 5 5 5 5 5 f . . . . . 
+. . . . . f 5 5 5 f . . . . . . 
+. . . . . . f f f . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`]
+}
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . 7 . 7 . 7 . . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . b b b b . . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . 7 b b b b 7 . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b b b b b b . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . b b b b b b . . . . . . . . f 
-. . 7 7 . b b b 5 b b b . . . . . b b 5 5 b b . . . . . . . . . 
-. . 7 7 . b b b 5 b b b . . . . 9 b b 5 5 b b . . . . . . . . . 
+. . 7 7 . b b b 5 b b b . . . . b b b 5 5 b b . . . . . . . . . 
+. . 7 7 . b b b 5 b b b 7 . . . 9 b b 5 5 b b . . . 7 . . 7 . . 
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -176,22 +303,22 @@ e e e e e e e e e e e e e e e e
 e e e e e e e e e e e e e e e e 
 `, true)
         scene.setTile(9, img`
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
-. 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
-. 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
-. 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 b b b b b b 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-. 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
+1 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 b b b b b b b b 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `, true)
         scene.setTile(7, img`
 . . . . . . . . . . . . . . . . 
@@ -389,7 +516,8 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function Instructions () {
     game.showLongText("Collect money $$$ to advance. Use the money that you collect to upgrade your weapon. Money is also like score so collect the most to win", DialogLayout.Center)
-    game.showLongText("Run into an ATM to check how much money you have", DialogLayout.Center)
+    game.showLongText("Run into an ATM to check how much money you have, deposit money so you do not lose it on death, and withdraw money. Heres $5 to start", DialogLayout.Center)
+    game.showLongText("Controls: Keyboard X to change direction you are shooting, Keyboard A to shoot, and Keyboard J to change/cycle available weapons", DialogLayout.Center)
 }
 scene.onHitWall(SpriteKind.Player, function (sprite) {
     if (canjump == false) {
@@ -800,7 +928,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.money, function (sprite, otherSprite) {
-    cashAmount += 1
+    cashAmount += Math.randomRange(5, 10)
     otherSprite.destroy()
 })
 function Title_Screen () {
@@ -991,18 +1119,23 @@ function DoubleJump () {
         }
     }
 }
-let cashAmount = 0
 let COIN: Sprite = null
 let Myheight = 0
 let doubleJump = false
 let canjump = false
 let LevelList: Image[] = []
+let Available_weapon_sprites: Image[] = []
+let moneyinteraction = ""
 let difficulty = 0
 let Person: Sprite = null
 let mouse: Sprite = null
 let stilltitlescreen = false
 let levelnumber = 0
+let cashAmount = 0
+let BANKaccount = 0
 Instructions()
+BANKaccount = 0
+cashAmount = 5
 levelnumber = 0
 Title_Screen()
 game.onUpdate(function () {

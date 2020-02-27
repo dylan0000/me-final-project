@@ -3,7 +3,8 @@
     "dependencies": {
         "device": "*",
         "color-coded-tilemap": "*",
-        "animation": "*"
+        "animation": "*",
+        "controller": "*"
     },
     "description": "",
     "files": [
