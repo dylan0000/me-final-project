@@ -74,134 +74,6 @@ function Change_projectile_speed () {
         XVELOCITY = XVELOCITY * -1
     }
 }
-function tile_wall () {
-    scene.setTile(15, img`
-f f f f f f f f f f f f f f f f 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
-b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-f f f f f f f f f f f f f f f f 
-`, true)
-    scene.setTile(11, img`
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-d d d d d 1 e e e e e e e 1 d d 
-d d d d d 1 e e e e e e e 1 d d 
-d d d d d 1 e e e e e e e 1 d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-e e e e e 1 d d d d d d d 1 e e 
-e e e e e 1 d d d d d d d 1 e e 
-e e e e e 1 d d d d d d d 1 e e 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`, true)
-    scene.setTile(1, img`
-c c c c c c c c c c c c c c c c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c c c c c c c c c c c c c c c c 
-`, true)
-    scene.setTile(5, img`
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-`, true)
-    scene.setTile(9, img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
-1 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
-1 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
-1 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 b b b b b b b b 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`, true)
-    scene.setTile(2, img`
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
-7 7 7 7 7 f 7 f 7 f f 7 7 7 7 7 
-7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
-7 7 7 f f 7 f 7 f f 7 f f 7 7 7 
-7 7 7 7 f f f 7 7 f f f 7 7 7 7 
-7 7 7 7 7 f f f f f f 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 f f 7 7 f f 7 7 7 7 7 
-7 7 7 7 f f 7 7 7 7 f f 7 7 7 7 
-7 7 7 f f 7 7 7 7 7 7 f f 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-`, true)
-    scene.setTile(7, img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, false)
-}
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
@@ -1296,6 +1168,134 @@ function Title_Screen () {
 `, SpriteKind.cursor)
     mouse.setPosition(45, 50)
 }
+function tile_wall () {
+    scene.setTile(15, img`
+f f f f f f f f f f f f f f f f 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+f f f f f f f f f f f f f f f f 
+`, true)
+    scene.setTile(11, img`
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`, true)
+    scene.setTile(1, img`
+c c c c c c c c c c c c c c c c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c c c c c c c c c c c c c c c c 
+`, true)
+    scene.setTile(5, img`
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+`, true)
+    scene.setTile(9, img`
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
+1 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 b b b b b b b b 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`, true)
+    scene.setTile(2, img`
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
+7 7 7 7 7 f 7 f 7 f f 7 7 7 7 7 
+7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
+7 7 7 f f 7 f 7 f f 7 f f 7 7 7 
+7 7 7 7 f f f 7 7 f f f 7 7 7 7 
+7 7 7 7 7 f f f f f f 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 f f 7 7 f f 7 7 7 7 7 
+7 7 7 7 f f 7 7 7 7 f f 7 7 7 7 
+7 7 7 f f 7 7 7 7 7 7 f f 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+`, true)
+    scene.setTile(7, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, false)
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 70 && mouse.y > 50) {
@@ -1367,7 +1367,13 @@ info.onLifeZero(function () {
     cashAmount = 0
     levelnumber = 0
     scene.setTileMap(LevelList[levelnumber])
-    info.setLife(3)
+    if (difficulty == 0) {
+        info.setLife(4)
+    } else if (difficulty == 1) {
+        info.setLife(3)
+    } else {
+        info.setLife(1)
+    }
     scene.placeOnRandomTile(Person, 13)
 })
 let levelnumber = 0
