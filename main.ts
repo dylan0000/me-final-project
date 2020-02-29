@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const cursor = SpriteKind.create()
     export const money = SpriteKind.create()
     export const shop = SpriteKind.create()
+    export const arrow = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (stilltitlescreen == true) {
@@ -47,6 +48,13 @@ scene.onHitTile(SpriteKind.Player, 9, function (sprite) {
         }
     }
 })
+function Projectileshot () {
+    Arrays()
+    projectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
+    if (weaponoption == 2) {
+        projectile.ay = 320
+    }
+}
 function Change_projectile_speed () {
     if (weaponoption < 2 || weaponoption > 2) {
         if (XVELOCITY == 100) {
@@ -65,21 +73,6 @@ function Change_projectile_speed () {
     } else if (weaponoption == 2) {
         XVELOCITY = XVELOCITY * -1
     }
-}
-function Projectileshot () {
-    Arrays()
-    projectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
-    if (weaponoption == 2) {
-        projectile.ay = 320
-    }
-}
-function SET () {
-    BANKaccount = 0
-    cashAmount = 5
-    canshoot = false
-    levelnumber = 0
-    XVELOCITY = 100
-    YVELOCITY = 0
 }
 function LevelsList () {
     if (difficulty == 0) {
@@ -745,8 +738,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.shop, function (sprite, otherSpr
         } else {
             game.splash("You did not pick 0-4", "Or you are poor")
         }
-        Person.x += 5
     }
+    Person.x += 5
 })
 function Player2 () {
     info.setLife(4)
@@ -1234,6 +1227,15 @@ function DoubleJump () {
         }
     }
 }
+function SET () {
+    BANKaccount = 0
+    cashAmount = 5
+    canshoot = false
+    levelnumber = 0
+    XVELOCITY = 100
+    YVELOCITY = 0
+}
+let levelnumber = 0
 let damage = 0
 let BUY = ""
 let COIN: Sprite = null
@@ -1241,14 +1243,13 @@ let merchant: Sprite = null
 let Myheight = 0
 let doubleJump = false
 let canjump = false
-let LevelList: Image[] = []
-let levelnumber = 0
 let canshoot = false
-let Available_weapon_sprites: Image[] = []
-let projectile: Sprite = null
+let LevelList: Image[] = []
 let YVELOCITY = 0
 let XVELOCITY = 0
 let weaponoption = 0
+let Available_weapon_sprites: Image[] = []
+let projectile: Sprite = null
 let BANKaccount = 0
 let moneyinteraction = ""
 let cashAmount = 0
