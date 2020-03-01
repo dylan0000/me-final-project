@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const money = SpriteKind.create()
     export const shop = SpriteKind.create()
     export const arrow = SpriteKind.create()
+    export const bit = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (stilltitlescreen == true) {
@@ -54,9 +55,9 @@ scene.onHitTile(SpriteKind.Player, 9, function (sprite) {
 })
 function Projectileshot () {
     Arrays()
-    projectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
+    MyProjectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
     if (weaponoption == 2) {
-        projectile.ay = 320
+        MyProjectile.ay = 320
     }
 }
 function Change_projectile_speed () {
@@ -76,8 +77,13 @@ function Change_projectile_speed () {
         }
     } else if (weaponoption == 2) {
         XVELOCITY = XVELOCITY * -1
+    } else {
+    	
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.bit, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
@@ -102,7 +108,7 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 `, img`
-2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 . . . . 2 2 2 2 2 2 
 . . . . . . . . . . . . . . . . 
 . . . . . . . 7 7 . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -367,6 +373,28 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 `)
     }
 })
+function make_enemys () {
+    for (let value of scene.getTilesByType(3)) {
+        robot = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . . . b 1 1 1 b . . . . . 
+. . . . . . b 1 2 1 b . . . . . 
+. . . . . . b 1 1 1 b . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . . . . b b b . . . . . . 
+. . . . . . . b b b . . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . f f f f f f f f f . . . 
+. . . f . b . b . b . b . f . . 
+. . . f b . b . b . b . b f . . 
+. . . . f f f f f f f f f . . . 
+`, SpriteKind.Enemy)
+    }
+}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (canshoot == true) {
         Change_projectile_speed()
@@ -860,6 +888,92 @@ function Arrays () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `]
+    pieces_list = [img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 1 6 . . . . . . . 
+. . . . . . . 1 1 . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . 6 1 . . . . . . 
+. . . . . . . . 1 1 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 6 1 6 . . . . . . 
+. . . . . . . 1 1 1 . . . . . . 
+. . . . . . . 6 1 6 . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 6 . . . . . . . . 
+. . . . . 6 1 1 6 . . . . . . . 
+. . . . . . 1 1 . . . . . . . . 
+. . . . . . . 6 . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . 6 1 . . . . . . . 
+. . . . . . . 1 6 . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`]
 }
 function changing_levels () {
     if (levelnumber == LevelList.length) {
@@ -1020,13 +1134,17 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite) {
     if (weaponoption == 2) {
         scene.cameraShake(3, 200)
         sprite.startEffect(effects.fire)
+    } else if (weaponoption == 3) {
+        piece = sprites.create(pieces_list[Math.randomRange(0, pieces_list.length - 1)], SpriteKind.bit)
+        piece.setPosition(MyProjectile.x, MyProjectile.y)
+        piece.follow(Person)
     }
 })
 scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
     info.changeLifeBy(-1)
     scene.placeOnRandomTile(Person, 13)
 })
-// clears all remains
+// clears all remains  
 function ClearMap () {
     for (let value of sprites.allOfKind(SpriteKind.money)) {
         value.destroy()
@@ -1229,6 +1347,25 @@ e e e e e 1 d d d d d d d 1 e e
 e e e e e 1 d d d d d d d 1 e e 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `, true)
+    // enemy spawn here
+    scene.setTile(3, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, false)
     scene.setTile(1, img`
 c c c c c c c c c c c c c c c c 
 c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
@@ -1377,15 +1514,26 @@ function SET () {
  * 
  * -Damage for weapons
  * 
- * -Enemies
+ *   -Enemies
  * 
  * -Limit for weapon amount (x25)
  * 
  * -different prices
  * 
  * -harder difficulty
+ * 
+ * -add bounce to 1 projectile
+ * 
+ * -add frag to bomb
+ * 
+ * -walls can take damage
+ * 
+ * finish levels too
+ * 
+ * -make the bits kill enemies
  */
 info.onLifeZero(function () {
+    ClearMap()
     game.splash("You dropped " + cashAmount + " coins")
     weaponoption = 7
     canshoot = false
@@ -1401,7 +1549,9 @@ info.onLifeZero(function () {
     }
     scene.placeOnRandomTile(Person, 13)
 })
+let piece: Sprite = null
 let levelnumber = 0
+let pieces_list: Image[] = []
 let Task_List: string[] = []
 let damage = 0
 let BUY = ""
@@ -1411,12 +1561,13 @@ let Myheight = 0
 let doubleJump = false
 let canjump = false
 let canshoot = false
+let robot: Sprite = null
 let LevelList: Image[] = []
 let YVELOCITY = 0
 let XVELOCITY = 0
 let weaponoption = 0
 let Available_weapon_sprites: Image[] = []
-let projectile: Sprite = null
+let MyProjectile: Sprite = null
 let BANKaccount = 0
 let moneyinteraction = ""
 let cashAmount = 0
