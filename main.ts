@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const shop = SpriteKind.create()
     export const arrow = SpriteKind.create()
     export const bit = SpriteKind.create()
+    export const slot = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (stilltitlescreen == true) {
@@ -53,6 +54,168 @@ scene.onHitTile(SpriteKind.Player, 9, function (sprite) {
         sprite.x += -5
     }
 })
+function changing_levels () {
+    if (levelnumber == LevelList.length) {
+        game.over(true)
+    }
+    ClearMap()
+    levelnumber += 1
+    game.splash(Task_List[levelnumber])
+    scene.setTileMap(LevelList[levelnumber])
+    CreateCoins()
+    for (let value3 of scene.getTilesByType(13)) {
+        scene.place(value3, Person)
+    }
+    make_enemys()
+}
+function tile_wall () {
+    scene.setTile(15, img`
+f f f f f f f f f f f f f f f f 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+f f f f f f f f f f f f f f f f 
+`, true)
+    scene.setTile(11, img`
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+d d d d d 1 e e e e e e e 1 d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+d 1 e e e e e e e 1 d d d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+e e e e e 1 d d d d d d d 1 e e 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`, true)
+    // enemy spawn here
+    scene.setTile(3, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, false)
+    scene.setTile(1, img`
+c c c c c c c c c c c c c c c c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
+c c c c c c c c c c c c c c c c 
+`, true)
+    scene.setTile(5, img`
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+`, true)
+    scene.setTile(9, img`
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
+1 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
+1 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 b b b b b b b b 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`, true)
+    scene.setTile(2, img`
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
+7 7 7 7 7 f 7 f 7 f f 7 7 7 7 7 
+7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
+7 7 7 f f 7 f 7 f f 7 f f 7 7 7 
+7 7 7 7 f f f 7 7 f f f 7 7 7 7 
+7 7 7 7 7 f f f f f f 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
+7 7 7 7 7 f f 7 7 f f 7 7 7 7 7 
+7 7 7 7 f f 7 7 7 7 f f 7 7 7 7 
+7 7 7 f f 7 7 7 7 7 7 f f 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+`, true)
+    // coin
+    scene.setTile(7, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, false)
+}
 function Projectileshot () {
     Arrays()
     MyProjectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
@@ -60,6 +223,18 @@ function Projectileshot () {
         MyProjectile.ay = 320
     }
 }
+controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Released, function () {
+    if (stilltitlescreen == false) {
+        if (canshoot == true) {
+            INVENTORY.destroy()
+        } else {
+            INVENTORY.destroy()
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.bit, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
 function Change_projectile_speed () {
     if (weaponoption < 2 || weaponoption > 2) {
         if (XVELOCITY == 100) {
@@ -81,9 +256,6 @@ function Change_projectile_speed () {
     	
     }
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.bit, function (sprite, otherSprite) {
-    otherSprite.destroy()
-})
 function LevelsList () {
     if (difficulty == 0) {
         LevelList = [img`
@@ -373,29 +545,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 `)
     }
 })
-function make_enemys () {
-    for (let value of scene.getTilesByType(3)) {
-        robot = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . b b b b b . . . . . 
-. . . . . . b 1 1 1 b . . . . . 
-. . . . . . b 1 2 1 b . . . . . 
-. . . . . . b 1 1 1 b . . . . . 
-. . . . . . b b b b b . . . . . 
-. . . . . . . b b b . . . . . . 
-. . . . . . . b b b . . . . . . 
-. . . . . . b b b b b . . . . . 
-. . . . f f f f f f f f f . . . 
-. . . f . b . b . b . b . f . . 
-. . . f b . b . b . b . b f . . 
-. . . . f f f f f f f f f . . . 
-`, SpriteKind.Enemy)
-        scene.place(value, robot)
-    }
-}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (canshoot == true) {
         Change_projectile_speed()
@@ -404,7 +553,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 function Instructions () {
     game.showLongText("Collect money $$$ to advance. Use the money that you collect to upgrade your weapon. Money is also like score so collect the most to win", DialogLayout.Center)
     game.showLongText("Run into an ATM to check how much money you have, deposit money so you do not lose it on death, and withdraw money. Heres $5 to start", DialogLayout.Center)
-    game.showLongText("Controls: Keyboard X to change direction you are shooting, Keyboard A to shoot, and Keyboard J to change/cycle available weapons", DialogLayout.Center)
+    game.showLongText("Controls: Keyboard X to change direction you are shooting, Keyboard A to shoot, and Keyboard J to check current weapon", DialogLayout.Center)
 }
 scene.onHitWall(SpriteKind.Player, function (sprite) {
     if (canjump == false) {
@@ -467,7 +616,7 @@ f f f f f f f f f f f f f f f f
     tiles.placeOnTile(merchant, tiles.getTileLocation(23, 16))
 }
 function CreateCoins () {
-    for (let value of scene.getTilesByType(7)) {
+    for (let value2 of scene.getTilesByType(7)) {
         COIN = sprites.create(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -662,7 +811,7 @@ function CreateCoins () {
         100,
         true
         )
-        scene.place(value, COIN)
+        scene.place(value2, COIN)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.shop, function (sprite, otherSprite) {
@@ -704,6 +853,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.shop, function (sprite, otherSpr
     }
     Person.x += 5
 })
+function makebit () {
+    piece = sprites.create(pieces_list[Math.randomRange(0, pieces_list.length - 1)], SpriteKind.bit)
+    piece.setPosition(MyProjectile.x, MyProjectile.y)
+    piece.follow(Person, 70)
+}
 function Player2 () {
     if (difficulty == 0) {
         info.setLife(5)
@@ -787,6 +941,8 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     if (weaponoption == 2) {
         sprite.startEffect(effects.fire)
         scene.cameraShake(3, 200)
+    } else if (weaponoption == 3) {
+        makebit()
     }
 })
 // change levels
@@ -797,22 +953,51 @@ function Arrays () {
     Task_List = ["Goal 1: Preparation", "Goal 2: Climb tower", "Goal 3:"]
     // rubber duck cost for 1 = $10
     //
+    //
+    //
+    //
     // damage = 2
+    //
+    //
+    //
     //
     // pellet cost for 1 = $16
     //
+    //
+    //
+    //
     // damage = 3.5
+    //
+    //
+    //
     //
     // bomb cost for 1 = $26
     //
+    //
+    //
+    //
     // damage = 8
+    //
+    //
+    //
     //
     // star cost for 1 = $22
     //
     //
+    //
+    //
+    //
+    //
     // damage = 4
     //
+    //
+    //
+    //
     // coin cost for 1 = $33
+    //
+    //
+    //
+    //
     //
     //
     // damage = 12
@@ -989,20 +1174,6 @@ function Arrays () {
 . . . . . . . . . . . . . . . . 
 `]
 }
-function changing_levels () {
-    if (levelnumber == LevelList.length) {
-        game.over(true)
-    }
-    ClearMap()
-    levelnumber += 1
-    game.splash(Task_List[levelnumber])
-    scene.setTileMap(LevelList[levelnumber])
-    CreateCoins()
-    for (let value of scene.getTilesByType(13)) {
-        scene.place(value, Person)
-    }
-    make_enemys()
-}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 50) {
@@ -1146,14 +1317,40 @@ b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
         }
     }
 })
+controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
+    if (stilltitlescreen == false) {
+        if (canshoot == true) {
+            INVENTORY = sprites.create(Available_weapon_sprites[weaponoption], SpriteKind.slot)
+            INVENTORY.setPosition(Person.x, Person.y - 20)
+        } else if (canshoot == false) {
+            INVENTORY = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 2 2 2 2 2 . . . . . 
+. . . . . 2 1 1 1 1 1 2 . . . . 
+. . . . 2 1 2 1 1 1 2 1 2 . . . 
+. . . . 2 1 1 2 1 2 1 1 2 . . . 
+. . . . 2 1 1 1 2 1 1 1 2 . . . 
+. . . . 2 1 1 2 1 2 1 1 2 . . . 
+. . . . 2 1 2 1 1 1 2 1 2 . . . 
+. . . . . 2 1 1 1 1 1 2 . . . . 
+. . . . . . 2 2 2 2 2 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.slot)
+            INVENTORY.setPosition(Person.x, Person.y - 20)
+        }
+    }
+})
 scene.onHitWall(SpriteKind.Projectile, function (sprite) {
     if (weaponoption == 2) {
         scene.cameraShake(3, 200)
         sprite.startEffect(effects.fire)
     } else if (weaponoption == 3) {
-        piece = sprites.create(pieces_list[Math.randomRange(0, pieces_list.length - 1)], SpriteKind.bit)
-        piece.setPosition(MyProjectile.x, MyProjectile.y)
-        piece.follow(Person, 70)
+        makebit()
     }
 })
 scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
@@ -1171,8 +1368,8 @@ sprites.onOverlap(SpriteKind.bit, SpriteKind.Enemy, function (sprite, otherSprit
 })
 // clears all remains
 function ClearMap () {
-    for (let value of sprites.allOfKind(SpriteKind.money)) {
-        value.destroy()
+    for (let value4 of sprites.allOfKind(SpriteKind.money)) {
+        value4.destroy()
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -1186,9 +1383,33 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+// destroy pieces
 scene.onHitWall(SpriteKind.bit, function (sprite) {
     sprite.destroy()
 })
+function make_enemys () {
+    for (let value of scene.getTilesByType(3)) {
+        robot = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . . . b 1 1 1 b . . . . . 
+. . . . . . b 1 2 1 b . . . . . 
+. . . . . . b 1 1 1 b . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . . . . b b b . . . . . . 
+. . . . . . . b b b . . . . . . 
+. . . . . . b b b b b . . . . . 
+. . . . f f f f f f f f f . . . 
+. . . f . b . b . b . b . f . . 
+. . . f b . b . b . b . b f . . 
+. . . . f f f f f f f f f . . . 
+`, SpriteKind.Enemy)
+        scene.place(value, robot)
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.money, function (sprite, otherSprite) {
     cashAmount += Math.randomRange(5, 10)
     otherSprite.destroy()
@@ -1338,154 +1559,6 @@ function Title_Screen () {
 `, SpriteKind.cursor)
     mouse.setPosition(45, 50)
 }
-function tile_wall () {
-    scene.setTile(15, img`
-f f f f f f f f f f f f f f f f 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
-b b 5 5 5 b b 5 5 5 b b 5 5 5 b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-f f f f f f f f f f f f f f f f 
-`, true)
-    scene.setTile(11, img`
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-d d d d d 1 e e e e e e e 1 d d 
-d d d d d 1 e e e e e e e 1 d d 
-d d d d d 1 e e e e e e e 1 d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-d 1 e e e e e e e 1 d d d d d d 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-e e e e e 1 d d d d d d d 1 e e 
-e e e e e 1 d d d d d d d 1 e e 
-e e e e e 1 d d d d d d d 1 e e 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`, true)
-    // enemy spawn here
-    scene.setTile(3, img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, false)
-    scene.setTile(1, img`
-c c c c c c c c c c c c c c c c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c 1 1 1 1 1 1 1 1 1 1 1 1 1 1 c 
-c c c c c c c c c c c c c c c c 
-`, true)
-    scene.setTile(5, img`
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-`, true)
-    scene.setTile(9, img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f 1 1 f f f 1 f 1 1 1 f 1 
-1 1 f 1 f 1 1 f 1 1 f f 1 f f 1 
-1 1 f f f 1 1 f 1 1 f 1 f 1 f 1 
-1 1 f 1 f 1 1 f 1 1 f 1 1 1 f 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 b b b b b b b b 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`, true)
-    scene.setTile(2, img`
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
-7 7 7 7 7 f 7 f 7 f f 7 7 7 7 7 
-7 7 7 7 7 f 7 7 7 7 f 7 7 7 7 7 
-7 7 7 f f 7 f 7 f f 7 f f 7 7 7 
-7 7 7 7 f f f 7 7 f f f 7 7 7 7 
-7 7 7 7 7 f f f f f f 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 7 f f f f 7 7 7 7 7 7 
-7 7 7 7 7 f f 7 7 f f 7 7 7 7 7 
-7 7 7 7 f f 7 7 7 7 f f 7 7 7 7 
-7 7 7 f f 7 7 7 7 7 7 f f 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
-`, true)
-    // coin
-    scene.setTile(7, img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, false)
-}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 70 && mouse.y > 50) {
@@ -1538,29 +1611,37 @@ function SET () {
     YVELOCITY = 0
     enemy_HP = 20
 }
-/**
- * Missing 
- * 
- * -Damage for weapons
- * 
- *   -Enemies
- * 
- * -Limit for weapon amount (x25)
- * 
- * -different prices
- * 
- * -harder difficulty
- * 
- * -add bounce to 1 projectile
- * 
- * -(done
- * 
- * -walls can take damage
- * 
- * finish levels too
- * 
- * -make the bits kill enemies
- */
+// Missing
+//
+//
+// -Damage for weapons
+//
+//
+// -Enemies
+//
+//
+// -Limit for weapon amount (x25)
+//
+//
+// -different prices(done
+//
+//
+// -harder difficulty
+//
+//
+// -add bounce to 1 projectile
+//
+//
+// -(done
+//
+//
+// -walls can take damage
+//
+//
+// finish levels too
+//
+//
+// -make the bits kill enemies
 info.onLifeZero(function () {
     ClearMap()
     game.splash("You dropped " + cashAmount + " coins")
@@ -1579,11 +1660,10 @@ info.onLifeZero(function () {
     scene.placeOnRandomTile(Person, 13)
     info.setScore(0)
 })
-let piece: Sprite = null
-let levelnumber = 0
-let pieces_list: Image[] = []
-let Task_List: string[] = []
+let robot: Sprite = null
 let enemy_HP = 0
+let pieces_list: Image[] = []
+let piece: Sprite = null
 let damage = 0
 let BUY = ""
 let COIN: Sprite = null
@@ -1591,14 +1671,16 @@ let merchant: Sprite = null
 let Myheight = 0
 let doubleJump = false
 let canjump = false
+let INVENTORY: Sprite = null
 let canshoot = false
-let robot: Sprite = null
-let LevelList: Image[] = []
 let YVELOCITY = 0
 let XVELOCITY = 0
 let weaponoption = 0
 let Available_weapon_sprites: Image[] = []
 let MyProjectile: Sprite = null
+let Task_List: string[] = []
+let LevelList: Image[] = []
+let levelnumber = 0
 let BANKaccount = 0
 let moneyinteraction = ""
 let cashAmount = 0
