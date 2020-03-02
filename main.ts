@@ -90,11 +90,11 @@ function LevelsList () {
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . 7 . 7 . 7 . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . 7 3 7 3 7 . . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . 3 3 . . . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . 7 b b b b 7 . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b b b b b b . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
@@ -136,12 +136,12 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
 . . . . b . 2 b 2 . . b . . . . 
 . . . . b . . 2 b . . b . 7 . . 
 . . . . b . . 2 . . . b . . . . 
-. . . . b . 2 . . . b b . . . . 
+. . . . b . . 2 . . b b . . . . 
 . . 7 . b . b b . . . . . . . . 
 . . . . b . 9 b . . . . . . . . 
 d . . . b b b b b b b b b b 2 b 
 `, img`
-. . . . . . . . . . . . . . . . . . . . . . . . . . 3 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -172,7 +172,7 @@ d . . . b b b b b b b b b b 2 b
 . . 7 7 7 7 7 . . . . . . . . . . . . . . . . . . . . 
 d . . . . . . . . . . . . . . . . . . . . . . . . . . 
 f f f f f f f f . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . f . . . . . . . . . . . . . . . . . . 
+. . . . . . . . f . . . . . 3 . . . . . . . . . . . . 
 . . . . . . . . . f f f f f f . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . 3 
 `, img`
@@ -393,6 +393,7 @@ function make_enemys () {
 . . . f b . b . b . b . b f . . 
 . . . . f f f f f f f f f . . . 
 `, SpriteKind.Enemy)
+        scene.place(value, robot)
     }
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -690,7 +691,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.shop, function (sprite, otherSpr
         } else if (weaponoption == 3 && cashAmount >= 50) {
             cashAmount += -50
             canshoot = true
-            damage = 6
+            damage = 4
             game.splash("You received x25 stars")
         } else if (weaponoption == 4 && cashAmount >= 90) {
             cashAmount += -90
@@ -711,7 +712,7 @@ function Player2 () {
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . f 1 1 1 1 1 f . . . . 
 . . . . . f 1 f 1 f 1 f . . . . 
-. . . . . f 1 1 f 1 1 f . . . . 
+. . . . . f 1 1 7 1 1 f . . . . 
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . . . f f f . . . . . . 
 . . . . . . . . f . . . . . . . 
@@ -734,7 +735,7 @@ function Player2 () {
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . f 1 1 1 1 1 f . . . . 
 . . . . . f 1 f 1 f 1 f . . . . 
-. . . . . f 1 1 f 1 1 f . . . . 
+. . . . . f 1 1 5 1 1 f . . . . 
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . . . f f f . . . . . . 
 . . . . . . . . f . . . . . . . 
@@ -757,7 +758,7 @@ function Player2 () {
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . f 1 1 1 1 1 f . . . . 
 . . . . . f 1 f 1 f 1 f . . . . 
-. . . . . f 1 1 f 1 1 f . . . . 
+. . . . . f 1 1 2 1 1 f . . . . 
 . . . . . . f 1 1 1 f . . . . . 
 . . . . . . . f f f . . . . . . 
 . . . . . . . . f . . . . . . . 
@@ -770,11 +771,24 @@ function Player2 () {
 . . . . . . f . . . f . . . . . 
 . . . . . . f . . . f . . . . . 
 `, SpriteKind.Player)
-        Person.ay = 365
+        Person.ay = 369
         scene.cameraFollowSprite(Person)
-        controller.moveSprite(Person, 90, 0)
+        controller.moveSprite(Person, 85, 0)
     }
 }
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprite.destroy()
+    enemy_HP += damage * -1
+    if (enemy_HP <= 0) {
+        otherSprite.destroy()
+        enemy_HP = 20
+        info.changeScoreBy(1)
+    }
+    if (weaponoption == 2) {
+        sprite.startEffect(effects.fire)
+        scene.cameraShake(3, 200)
+    }
+})
 // change levels
 scene.onHitTile(SpriteKind.Player, 5, function (sprite) {
     changing_levels()
@@ -987,6 +1001,7 @@ function changing_levels () {
     for (let value of scene.getTilesByType(13)) {
         scene.place(value, Person)
     }
+    make_enemys()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
@@ -997,6 +1012,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             Player2()
             mouse.destroy()
             scene.setTileMap(LevelList[levelnumber])
+            make_enemys()
             scene.setBackgroundImage(img`
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
@@ -1137,14 +1153,23 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite) {
     } else if (weaponoption == 3) {
         piece = sprites.create(pieces_list[Math.randomRange(0, pieces_list.length - 1)], SpriteKind.bit)
         piece.setPosition(MyProjectile.x, MyProjectile.y)
-        piece.follow(Person)
+        piece.follow(Person, 70)
     }
 })
 scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
     info.changeLifeBy(-1)
     scene.placeOnRandomTile(Person, 13)
 })
-// clears all remains  
+sprites.onOverlap(SpriteKind.bit, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprite.destroy()
+    enemy_HP += damage * -0.5
+    if (enemy_HP <= 0) {
+        otherSprite.destroy()
+        enemy_HP = 20
+        info.changeScoreBy(1)
+    }
+})
+// clears all remains
 function ClearMap () {
     for (let value of sprites.allOfKind(SpriteKind.money)) {
         value.destroy()
@@ -1160,6 +1185,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             }
         }
     }
+})
+scene.onHitWall(SpriteKind.bit, function (sprite) {
+    sprite.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.money, function (sprite, otherSprite) {
     cashAmount += Math.randomRange(5, 10)
@@ -1508,6 +1536,7 @@ function SET () {
     levelnumber = 0
     XVELOCITY = 100
     YVELOCITY = 0
+    enemy_HP = 20
 }
 /**
  * Missing 
@@ -1524,7 +1553,7 @@ function SET () {
  * 
  * -add bounce to 1 projectile
  * 
- * -add frag to bomb
+ * -(done
  * 
  * -walls can take damage
  * 
@@ -1548,11 +1577,13 @@ info.onLifeZero(function () {
         info.setLife(1)
     }
     scene.placeOnRandomTile(Person, 13)
+    info.setScore(0)
 })
 let piece: Sprite = null
 let levelnumber = 0
 let pieces_list: Image[] = []
 let Task_List: string[] = []
+let enemy_HP = 0
 let damage = 0
 let BUY = ""
 let COIN: Sprite = null
