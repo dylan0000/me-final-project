@@ -217,8 +217,14 @@ e e e e e e e e e e e e e e e e
 `, false)
 }
 function Projectileshot () {
-    Arrays()
-    MyProjectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
+    if (weaponoption < 4) {
+        Arrays()
+        MyProjectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY, YVELOCITY)
+    } else if (weaponoption == 4) {
+        Arrays()
+        MyProjectile = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY - 10, YVELOCITY - 0)
+        Projectile4Clone = sprites.createProjectileFromSprite(Available_weapon_sprites[weaponoption], Person, XVELOCITY + 0, YVELOCITY + 10)
+    }
     if (weaponoption == 2) {
         MyProjectile.ay = 320
     }
@@ -233,6 +239,7 @@ controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Re
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.bit, function (sprite, otherSprite) {
+    ammo += 1
     otherSprite.destroy()
 })
 function Change_projectile_speed () {
@@ -252,8 +259,6 @@ function Change_projectile_speed () {
         }
     } else if (weaponoption == 2) {
         XVELOCITY = XVELOCITY * -1
-    } else {
-    	
     }
 }
 function LevelsList () {
@@ -824,29 +829,33 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.shop, function (sprite, otherSpr
             cashAmount += -30
             canshoot = true
             damage = 2
-            game.splash("You received x25 ducks")
+            ammo = 35
+            game.splash("You received x35 ducks", "An abundance of ducks")
         } else if (weaponoption == 1 && cashAmount >= 46) {
             cashAmount += -46
             canshoot = true
             damage = 3.5
-            game.splash("You received x25 pellets")
+            game.splash("You received x25 pellets", "Just faster than ducks")
         } else if (weaponoption == 2 && cashAmount >= 69) {
             cashAmount += -69
             canshoot = true
             XVELOCITY = 80
             YVELOCITY = -100
             damage = 8
-            game.splash("You received x25 bombs")
+            ammo = 18
+            game.splash("You received x18 bombs", "Perks: Explodes into 4 pieces")
         } else if (weaponoption == 3 && cashAmount >= 50) {
             cashAmount += -50
             canshoot = true
             damage = 4
-            game.splash("You received x25 stars")
+            ammo = 3
+            game.splash("You received x3 stars", "Perks: Infinite ammo if you recollect the bits")
         } else if (weaponoption == 4 && cashAmount >= 90) {
             cashAmount += -90
             canshoot = true
             damage = 12
-            game.splash("You received x25 coins")
+            ammo = 20
+            game.splash("You received x20 coins", "Perks: Pierces enemies")
         } else {
             game.splash("You did not pick 0-4", "Or you are poor")
         }
@@ -931,18 +940,27 @@ function Player2 () {
     }
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprite.destroy()
-    enemy_HP += damage * -1
-    if (enemy_HP <= 0) {
-        otherSprite.destroy()
-        enemy_HP = 20
-        info.changeScoreBy(1)
-    }
-    if (weaponoption == 2) {
-        sprite.startEffect(effects.fire)
-        scene.cameraShake(3, 200)
-    } else if (weaponoption == 3) {
-        makebit()
+    if (weaponoption < 4) {
+        sprite.destroy()
+        enemy_HP += damage * -1
+        if (enemy_HP <= 0) {
+            otherSprite.destroy()
+            enemy_HP = 20
+            info.changeScoreBy(1)
+        }
+        if (weaponoption == 2) {
+            sprite.startEffect(effects.fire)
+            scene.cameraShake(3, 200)
+        } else if (weaponoption == 3) {
+            makebit()
+        }
+    } else {
+        enemy_HP += damage * -1
+        if (enemy_HP <= 0) {
+            otherSprite.destroy()
+            enemy_HP = 20
+            info.changeScoreBy(1)
+        }
     }
 })
 // change levels
@@ -1321,6 +1339,7 @@ controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pr
     if (stilltitlescreen == false) {
         if (canshoot == true) {
             INVENTORY = sprites.create(Available_weapon_sprites[weaponoption], SpriteKind.slot)
+            Person.say("Ammo: x" + ammo, 1000)
             INVENTORY.setPosition(Person.x, Person.y - 20)
         } else if (canshoot == false) {
             INVENTORY = sprites.create(img`
@@ -1360,6 +1379,7 @@ scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
 sprites.onOverlap(SpriteKind.bit, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
     enemy_HP += damage * -0.5
+    ammo += 1
     if (enemy_HP <= 0) {
         otherSprite.destroy()
         enemy_HP = 20
@@ -1370,6 +1390,9 @@ sprites.onOverlap(SpriteKind.bit, SpriteKind.Enemy, function (sprite, otherSprit
 function ClearMap () {
     for (let value4 of sprites.allOfKind(SpriteKind.money)) {
         value4.destroy()
+    }
+    for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+        value.destroy()
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -1386,6 +1409,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 // destroy pieces
 scene.onHitWall(SpriteKind.bit, function (sprite) {
     sprite.destroy()
+    ammo += 1
 })
 function make_enemys () {
     for (let value of scene.getTilesByType(3)) {
@@ -1671,27 +1695,30 @@ let merchant: Sprite = null
 let Myheight = 0
 let doubleJump = false
 let canjump = false
+let ammo = 0
 let INVENTORY: Sprite = null
 let canshoot = false
+let Projectile4Clone: Sprite = null
 let YVELOCITY = 0
 let XVELOCITY = 0
-let weaponoption = 0
 let Available_weapon_sprites: Image[] = []
 let MyProjectile: Sprite = null
+let weaponoption = 0
 let Task_List: string[] = []
 let LevelList: Image[] = []
 let levelnumber = 0
 let BANKaccount = 0
 let moneyinteraction = ""
-let cashAmount = 0
 let difficulty = 0
 let Person: Sprite = null
 let mouse: Sprite = null
 let stilltitlescreen = false
+let cashAmount = 0
 Arrays()
 Instructions()
 Title_Screen()
 SET()
+cashAmount += 999
 game.onUpdate(function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 70) {
