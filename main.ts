@@ -33,7 +33,7 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
     }
 })
 /**
- * note: edit enemies, add ammo count, edit lvels to fit fbla
+ * note:  add ammo count, edit lvels to fit fbla
  */
 scene.onHitTile(SpriteKind.Player, 9, function (sprite) {
     if (difficulty < 2) {
@@ -326,7 +326,7 @@ e e e e e 1 d d d d d d d 1 e e
 e e e e e 1 d d d d d d d 1 e e 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `, true)
-        // changes robot position
+        // changes robot velocty x
         scene.setTile(4, img`
 d 1 e e e e e e e 1 d d d d d d 
 d 1 e e e e e e e 1 d d d d d d 
@@ -510,14 +510,14 @@ function LevelsList () {
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . 7 3 7 3 7 . . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . 3 3 . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . 7 b b b b 7 . . . . . . . . . 
+. . . . . . 7 7 3 7 7 . . . . . . . . . . . . . . . . . . . . . 
+. . . . . 4 b b b b b 4 . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . . . 7 7 . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . b b b b b b b . . . . . 7 . 3 . . 7 . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . 4 b b b b 4 . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b b b b b b . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
+. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
 . . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
@@ -558,8 +558,8 @@ f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
 . . . . b . . 2 . . . b . . . . 
 . . . . b . . 2 . . b b . . . . 
 . . 7 . b . b b . . . . . . . . 
-. . . . b . 9 b . . . . . . . . 
-d . . . b b b b b b b b b b 2 b 
+. . . . b . 9 4 . . . 3 . . . . 
+d . . . b b b b b b b b b b 2 4 
 `, img`
 . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -693,26 +693,36 @@ f f f f f f f f . . . . . . . . . . . . . . . . . . .
 `]
     } else if (difficulty == 2) {
         LevelList = [img`
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . 7 . 7 . 7 . . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b b b b b b b . . . . . . . . . . . . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . 7 b b b b 7 . . . . . . . . . 
-. . . . . b b b b b b b . . . . . b b b b b b . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
-. . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . b 1 b b 1 b . . . . . . . . . 
-. . . . . b b b b b b b . . . . . b 1 b b 1 b . . . . . . . . . 
-. . . . . b 1 b b b 1 b . . . . . b b b b b b . . . . . . . . f 
-. . 7 7 . b b b 5 b b b . . . . b b b 5 5 b b b . . . . . . . 5 
-d . 7 7 . b b b 5 b b b 7 . . . 9 b b 5 5 b b . . . 7 . . 7 . 5 
-f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . f . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 . . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . b b b b b b . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . b b b b b b . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 b . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 . . 1 b . . . . 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . b b . . b b . . . . 
+. . . . . . . . . . . . . . . . b . . . . . . . . . . . . . . . b 1 . 7 1 b . . . . 
+. . . . . . . . . . . . . . . . . b b b b b b b b b b b . . . . b 1 . . 1 b . . . . 
+. . . . . . . . . . . . . . . . . . b b b b b b b b b . . . . . b b 7 . b b . . . . 
+. . . . . . . . . . . . . . . . . . . b b b b b b b . . . . . . b 1 . . 1 b . . . . 
+. . . . . . . . . . . . . . . . . . . . b b b b b . . . . . . . b 1 . 7 1 b . . . . 
+. . . . . . 7 . . . . . . 7 . . . . . . . b b b . . . . . . . . b b . . b b . . . . 
+. . . . . b b b . . . . b b b . . . . . . . b . . . . . . . . . b 1 7 . 1 b . . . . 
+. . . . . b b b . . . . b b b . . . . . . . . b b . . . . . . . b 1 . . 1 b . . . . 
+. . . . . b 1 b . . . . b 1 b . . . . . . . . . b b . . . . . . b b . 7 b b . . . . 
+. . . . . b b b . . . . b b b . . . . . . . . . . b b . . . . . . . . . . . . . . . 
+. . . . . b 1 b . . . . b 1 b . . 7 b . . b 7 . . . b b . . . . . . . . . . . . . . 
+. . . . . b b b . . . . b b b . . b b . . b b . . . . b . . 2 2 b b b b b b . . . . 
+. . . . . b 1 b . . . . b 1 b . . b 1 . . 1 b . . . . . . . 2 2 b 1 1 1 1 b . . . . 
+. . . . . b b b . . . . b b b . . b 1 . . 1 b . . . b b b b 2 2 b 1 1 1 1 b . . . . 
+. . . . . b 1 b . . . . b 1 b . . b 1 . . 1 b . . . b 1 1 b 2 2 b b b b b b . . . . 
+. . . . . b b b . . . . b b b . . b 1 . . 1 b . . . b b b b 2 2 b 1 1 1 1 b . . . . 
+. . . . . b 1 b b . . b b 1 b . . b b . . b b . . . b 1 1 b 2 2 b 1 1 1 1 b . . . . 
+d . 7 7 . b b b b . . b b b b . b b b . . b b . . . b b b b 2 2 b 1 1 1 1 b . . . . 
+b b b b b b b b 5 b b 5 b b b 7 9 b b . . b b . . . b 1 1 b 2 2 b b b b b b . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 b 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 . . . . 
 `, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -1491,6 +1501,58 @@ function Arrays () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `]
+    random_spike = [img`
+f f f f f f f f f f f f f f f f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f f f f f f f f f f f f f f f f 
+`, img`
+f f f f f f f f f f f f f f f f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+f f f f f f f f f f f f f f f f 
+`, img`
+f f f f f f f f f f f f f f f f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f b b b b b b b b b b b b b b f 
+f f f f f f f f f f f f f f f f 
+`]
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (stilltitlescreen == true) {
@@ -1625,6 +1687,7 @@ b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b 
 `)
             tiles.placeOnTile(Person, tiles.getTileLocation(0, 16))
+            scene.placeOnRandomTile(Person, 13)
             game.splash(Task_List[levelnumber])
             CreateCoins()
             makeShop()
@@ -1733,13 +1796,22 @@ function make_enemys () {
 . . . f b . b . b . b . b f . . 
 . . . . f f f f f f f f f . . . 
 `, SpriteKind.Enemy)
-        robot.vx = 100
+        if (difficulty == 0) {
+            robot.vx = 85
+        } else {
+            robot.vx = 110
+        }
+        robot.ay = 300
         scene.place(value5, robot)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.money, function (sprite, otherSprite) {
     cashAmount += Math.randomRange(5, 10)
     otherSprite.destroy()
+})
+// moving enemy
+scene.onHitTile(SpriteKind.Enemy, 4, function (sprite) {
+    sprite.vx = sprite.vx * -1
 })
 function Title_Screen () {
     stilltitlescreen = true
@@ -2029,6 +2101,7 @@ info.onLifeZero(function () {
     info.setScore(0)
 })
 let robot: Sprite = null
+let random_spike: Image[] = []
 let enemy_HP = 0
 let pieces_list: Image[] = []
 let piece: Sprite = null
