@@ -1206,6 +1206,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     if (enemy_HP <= 0) {
         otherSprite.destroy()
         enemy_HP = 20
+        check_enemy_count += -1
         info.changeScoreBy(1)
     }
     if (weaponoption == 2) {
@@ -1747,6 +1748,7 @@ sprites.onOverlap(SpriteKind.bit, SpriteKind.Enemy, function (sprite, otherSprit
         otherSprite.destroy()
         enemy_HP = 20
         info.changeScoreBy(1)
+        check_enemy_count += -1
     }
 })
 // clears all remains
@@ -1796,10 +1798,13 @@ function make_enemys () {
 . . . f b . b . b . b . b f . . 
 . . . . f f f f f f f f f . . . 
 `, SpriteKind.Enemy)
+        check_enemy_count += 1
         if (difficulty == 0) {
             robot.vx = 85
+            enemyspeed_variable = robot.vx
         } else {
             robot.vx = 110
+            enemyspeed_variable = robot.vx
         }
         robot.ay = 300
         scene.place(value5, robot)
@@ -2010,6 +2015,7 @@ function SET () {
     YVELOCITY = 0
     enemy_HP = 20
     color_set = 0
+    check_enemy_count = 0
 }
 // Missing
 //
@@ -2100,8 +2106,10 @@ info.onLifeZero(function () {
     scene.placeOnRandomTile(Person, 13)
     info.setScore(0)
 })
+let enemyspeed_variable = 0
 let robot: Sprite = null
 let random_spike: Image[] = []
+let check_enemy_count = 0
 let enemy_HP = 0
 let pieces_list: Image[] = []
 let piece: Sprite = null
@@ -2139,6 +2147,19 @@ Title_Screen()
 SET()
 // delete this
 cashAmount += 999
+game.onUpdate(function () {
+    if (stilltitlescreen == false) {
+        if (check_enemy_count > 0) {
+            for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+                if (Person.y == value.y) {
+                    value.vx = 0
+                } else if (Person.y == value.y) {
+                    value.vx = enemyspeed_variable
+                }
+            }
+        }
+    }
+})
 game.onUpdate(function () {
     if (stilltitlescreen == true) {
         if (mouse.y == 70) {
